@@ -14,3 +14,5 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/movie/topRated',['as'=> 'getAllTopRated','uses'=>'MovieController@getAllTopRated']);
