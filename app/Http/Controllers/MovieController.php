@@ -11,13 +11,43 @@ class MovieController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        
+    public function getIndex(){
+        $urlpopular = "https://api.themoviedb.org/3/movie/popular?api_key=fe969c9839d99ddbd49bce311034c232&language=en-US&page=1";
+        $urlnowplaying = "https://api.themoviedb.org/3/movie/now_playing?api_key=fe969c9839d99ddbd49bce311034c232&language=en-US&page=1";
+        $urltoprated="https://api.themoviedb.org/3/movie/top_rated?api_key=fe969c9839d99ddbd49bce311034c232&language=en-US&page=1";
+        $urlupcoming ="https://api.themoviedb.org/3/movie/upcoming?api_key=fe969c9839d99ddbd49bce311034c232&language=en-US&page=1";
+        $urllatest="https://api.themoviedb.org/3/movie/latest?api_key=fe969c9839d99ddbd49bce311034c232&language=en-US";
+
+
+        $popular = access_api($urlpopular,'GET',[]);
+        $listnowplaying = access_api($urlnowplaying,'GET',[]);
+        $listtoprated = access_api($urltoprated,'GET',[]);
+        $listupcoming = access_api($urlupcoming,'GET',[]);
+        $listlatest = access_api($urllatest,'GET',[]);
+		if (is_array($popular->results)) {
+            $data['popular'] = $popular->results[0];
+            $data['listpopular'] = $popular->results;
+            $data['listnowplaying'] = $listnowplaying->results;
+            $data['listtoprated'] = $listtoprated->results;
+            $data['listupcoming'] = $listupcoming->results;
+            $data['listlatest'] = $listlatest;
+		}else{
+            $data['popular'] = [];
+            $data['listpopular']=[];
+            $data['listnowplaying'] = [];
+            $data['listtoprated'] = [];
+            $data['listupcoming'] = [];
+            $data['listlatest'] = [];
+        }
+
+        // var_dump($data['listupcoming']);
+		return view('welcome', $data);
     }
 
+    
+
     public function getAllTopRated(){
-        $url = "https://api.themoviedb.org/3/movie/popular?page=1&language=en-US&api_key=fe969c9839d99ddbd49bce311034c232";
+        $urlpopular = "https://api.themoviedb.org/3/movie/popular?page=1&language=en-US&api_key=fe969c9839d99ddbd49bce311034c232";
 
 		$listtoprated = access_api($url,'GET',[]);
 		if (is_array($listtoprated->results)) {

@@ -56,10 +56,10 @@
 						  <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
 						    <ul class="navbar-nav">
 								<li><a href="#home">Home</a></li>
-								<li><a href="#catagory">Category</a></li>
-								<li><a href="#men">Men</a></li>
-								<li><a href="#women">Women</a></li>
-								<li><a href="#latest">latest</a></li>
+								<li><a href="#catagory">Now Playing</a></li>
+								<li><a href="#men">UpComing</a></li>
+								<li><a href="#women">Popular</a></li>
+								<li><a href="#latest">Top Rated</a></li>
 									<!-- Dropdown -->
 								    <li class="dropdown">
 								      <a class="dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
@@ -89,7 +89,7 @@
 				<div class="container-fluid">
 					<div class="row fullscreen align-items-center justify-content-center">
 						<div class="col-lg-6 col-md-12 d-flex align-self-end img-right no-padding">
-							<img class="img-fluid" src="img/header-img.png" alt="">
+							<img class="img-fluid" src="https://image.tmdb.org/t/p/original/{{$popular->poster_path}}" alt="">
 						</div>
 						<div class="banner-content col-lg-6 col-md-12">
 							<h1 class="title-top"><span>Flat</span> 75%Off</h1>
@@ -110,60 +110,25 @@
 					<div class="row d-flex justify-content-center">
 						<div class="menu-content pb-40">
 							<div class="title text-center">
-								<h1 class="mb-10">Shop for Different Categories</h1>
+								<h1 class="mb-10">Now Playing</h1>
 								<p>Who are in extremely love with eco friendly system.</p>
 							</div>
 						</div>
 					</div>					
 					<div class="row">
-						<div class="col-lg-8 col-md-8 mb-10">
-							<div class="row category-bottom">
-								<div class="col-lg-6 col-md-6 mb-30">
-									<div class="content">
-									    <a href="#" target="_blank">
-									      <div class="content-overlay"></div>
-									  		 <img class="content-image img-fluid d-block mx-auto" src="img/c1.jpg" alt="">
-									      <div class="content-details fadeIn-bottom">
-									        <h3 class="content-title">Product for Women</h3>
-									      </div>
-									    </a>
-									</div>
-								</div>
-								<div class="col-lg-6 col-md-6 mb-30">
-									<div class="content">
-									    <a href="#" target="_blank">
-									      <div class="content-overlay"></div>
-									  		 <img class="content-image img-fluid d-block mx-auto" src="img/c2.jpg" alt="">
-									      <div class="content-details fadeIn-bottom">
-									        <h3 class="content-title">Product for Couple</h3>
-									      </div>
-									    </a>
-									</div>
-								</div>
-								<div class="col-lg-12">
-									<div class="content">
-										<a href="#" target="_blank">
-									      <div class="content-overlay"></div>
-									  		 <img class="content-image img-fluid d-block mx-auto" src="img/c3.jpg" alt="">
-									      <div class="content-details fadeIn-bottom">
-									        <h3 class="content-title">Shop Now</h3>
-									      </div>
-									    </a>
-									</div>
-							  	</div>																
-							</div>							
-						</div>
+                    @for ($i = 0; $i < 6; $i++)
 						<div class="col-lg-4 col-md-4 mb-10">
 						  <div class="content">
 						    <a href="#" target="_blank">
 						      <div class="content-overlay"></div>
-						  		 <img class="content-image img-fluid d-block mx-auto" src="img/c4.jpg" alt="">
+						  		 <img class="content-image img-fluid d-block mx-auto" src="https://image.tmdb.org/t/p/original/{{$listnowplaying[$i]->poster_path}}" alt="">
 						      <div class="content-details fadeIn-bottom">
-						        <h3 class="content-title">Product For Men</h3>
+						        <h3 class="content-title">{{$listnowplaying[$i]->original_title}}</h3>
 						      </div>
 						    </a>
 						  </div>
-						</div>						
+                        </div>
+                        @endfor				
 					</div>
 				</div>	
 			</section>
@@ -176,16 +141,18 @@
 					<div class="row d-flex justify-content-center">
 						<div class="menu-content pb-40">
 							<div class="title text-center">
-								<h1 class="text-white mb-10">New realeased Products for Men</h1>
+								<h1 class="text-white mb-10">New Upcoming Movies</h1>
 								<p class="text-white">Who are in extremely love with eco friendly system.</p>
 							</div>
 						</div>
 					</div>
 					<div class="row">
+                    @for ($i = 0; $i < 4; $i++)
+
 						<div class="col-lg-3 col-md-6 single-product">
 						  <div class="content">
 						      <div class="content-overlay"></div>
-						  		 <img class="content-image img-fluid d-block mx-auto" src="img/l1.jpg" alt="">
+						  		 <img class="content-image img-fluid d-block mx-auto" src="https://image.tmdb.org/t/p/original/{{$listupcoming[$i]->poster_path}}" alt="">
 						      <div class="content-details fadeIn-bottom">
 							        <div class="bottom d-flex align-items-center justify-content-center">
 										<a href="#"><span class="lnr lnr-heart"></span></a>
@@ -196,64 +163,21 @@
 						      </div>
 						  </div>
 						  <div class="price">
-						  		<h5 class="text-white">Long Sleeve shirt</h5>
-						  		<h3 class="text-white">$150.00</h3>
+						  		<h5 class="text-white">{{$listupcoming[$i]->original_title}}</h5>
+						  		<h3 class="text-white">
+                                  @if ($listupcoming[$i]->vote_average >= 1 && $listupcoming[$i]->vote_average <= 3)
+    Rp 3.500
+@elseif ($listupcoming[$i]->vote_average >= 3 && $listupcoming[$i]->vote_average <= 6)
+    Rp 8.250
+@elseif ($listupcoming[$i]->vote_average >= 6 && $listupcoming[$i]->vote_average <= 8)
+    Rp 16.350
+    @elseif ($listupcoming[$i]->vote_average >= 8 && $listupcoming[$i]->vote_average <= 10)
+    Rp 21.250
+@endif
+                                  </h3>
 						   </div>
-						</div>	
-						<div class="col-lg-3 col-md-6 single-product">
-						  <div class="content">
-						      <div class="content-overlay"></div>
-						  		 <img class="content-image img-fluid d-block mx-auto" src="img/l2.jpg" alt="">
-						      <div class="content-details fadeIn-bottom">
-							        <div class="bottom d-flex align-items-center justify-content-center">
-										<a href="#"><span class="lnr lnr-heart"></span></a>
-										<a href="#"><span class="lnr lnr-layers"></span></a>
-										<a href="#"><span class="lnr lnr-cart"></span></a>
-										<a href="#" data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
-									</div>
-						      </div>					      
-						  </div>
-						  <div class="price">
-						  		<h5 class="text-white">Long Sleeve shirt</h5>
-						  		<h3 class="text-white">$150.00</h3>
-						   </div>							  
-						</div>	
-						<div class="col-lg-3 col-md-6 single-product">
-						  <div class="content">
-						      <div class="content-overlay"></div>
-						  		 <img class="content-image img-fluid d-block mx-auto" src="img/l3.jpg" alt="">
-						      <div class="content-details fadeIn-bottom">
-							        <div class="bottom d-flex align-items-center justify-content-center">
-										<a href="#"><span class="lnr lnr-heart"></span></a>
-										<a href="#"><span class="lnr lnr-layers"></span></a>
-										<a href="#"><span class="lnr lnr-cart"></span></a>
-										<a href="#" data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
-									</div>
-						      </div>					      
-						  </div>
-						  <div class="price">
-						  		<h5 class="text-white">Long Sleeve shirt</h5>
-						  		<h3 class="text-white">$150.00</h3>
-						   </div>							  
-						</div>	
-						<div class="col-lg-3 col-md-6 single-product">
-						  <div class="content">
-					      	<div class="content-overlay"></div>
-					  		 <img class="content-image img-fluid d-block mx-auto" src="img/l4.jpg" alt="">
-						      <div class="content-details fadeIn-bottom">
-							        <div class="bottom d-flex align-items-center justify-content-center">
-										<a href="#"><span class="lnr lnr-heart"></span></a>
-										<a href="#"><span class="lnr lnr-layers"></span></a>
-										<a href="#"><span class="lnr lnr-cart"></span></a>
-										<a href="#" data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
-									</div>
-						      </div>
-						  </div>
-						    <div class="price">
-						  		<h5 class="text-white">Long Sleeve shirt</h5>
-						  		<h3 class="text-white">$150.00</h3>
-						    </div>							  					  
-						</div>																		
+                        </div>	
+                        @endfor																		
 					</div>
 				</div>	
 			</section>
@@ -264,15 +188,16 @@
 				<div class="container">
 					<div class="countdown-content pb-40">
 						<div class="title text-center">
-							<h1 class="mb-10">New realeased Products for Women</h1>
+							<h1 class="mb-10">Popular</h1>
 							<p>Who are in extremely love with eco friendly system.</p>
 						</div>
 					</div>
 					<div class="row">
+                    @for ($i = 0; $i < 4; $i++)
 						<div class="col-lg-3 col-md-6 single-product">
 						  <div class="content">
 						      <div class="content-overlay"></div>
-						  		 <img class="content-image img-fluid d-block mx-auto" src="img/l5.jpg" alt="">
+						  		 <img class="content-image img-fluid d-block mx-auto" width="10%" src="https://image.tmdb.org/t/p/original/{{$listpopular[$i]->poster_path}}" alt="">
 						      <div class="content-details fadeIn-bottom">
 							        <div class="bottom d-flex align-items-center justify-content-center">
 										<a href="#"><span class="lnr lnr-heart"></span></a>
@@ -283,64 +208,21 @@
 						      </div>
 						  </div>
 						  <div class="price">
-						  		<h5>Long Sleeve shirt</h5>
-						  		<h3>$150.00</h3>
+						  		<h5>{{$listpopular[$i]->original_title}}</h5>
+						  		<h3>
+                                  @if ($listpopular[$i]->vote_average >= 1 && $listpopular[$i]->vote_average <= 3)
+    Rp 3.500
+@elseif ($listpopular[$i]->vote_average >= 3 && $listpopular[$i]->vote_average <= 6)
+    Rp 8.250
+@elseif ($listpopular[$i]->vote_average >= 6 && $listpopular[$i]->vote_average <= 8)
+    Rp 16.350
+    @elseif ($listpopular[$i]->vote_average >= 8 && $listpopular[$i]->vote_average <= 10)
+    Rp 21.250
+@endif
+                                  </h3>
 						   </div>						  
-						</div>	
-						<div class="col-lg-3 col-md-6 single-product">
-						  <div class="content">
-						      <div class="content-overlay"></div>
-						  		 <img class="content-image img-fluid d-block mx-auto" src="img/l6.jpg" alt="">
-						      <div class="content-details fadeIn-bottom">
-							        <div class="bottom d-flex align-items-center justify-content-center">
-										<a href="#"><span class="lnr lnr-heart"></span></a>
-										<a href="#"><span class="lnr lnr-layers"></span></a>
-										<a href="#"><span class="lnr lnr-cart"></span></a>
-										<a href="#" data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
-									</div>
-						      </div>
-						  </div>
-						  <div class="price">
-						  		<h5>Long Sleeve shirt</h5>
-						  		<h3>$150.00</h3>
-						   </div>						  
-						</div>	
-						<div class="col-lg-3 col-md-6 single-product">
-						  <div class="content">
-						      <div class="content-overlay"></div>
-						  		 <img class="content-image img-fluid d-block mx-auto" src="img/l7.jpg" alt="">
-						      <div class="content-details fadeIn-bottom">
-							        <div class="bottom d-flex align-items-center justify-content-center">
-										<a href="#"><span class="lnr lnr-heart"></span></a>
-										<a href="#"><span class="lnr lnr-layers"></span></a>
-										<a href="#"><span class="lnr lnr-cart"></span></a>
-										<a href="#" data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
-									</div>
-						      </div>
-						  </div>
-						  <div class="price">
-						  		<h5>Long Sleeve shirt</h5>
-						  		<h3>$150.00</h3>
-						   </div>						  
-						</div>	
-						<div class="col-lg-3 col-md-6 single-product">
-						  <div class="content">
-						      <div class="content-overlay"></div>
-						  		 <img class="content-image img-fluid d-block mx-auto" src="img/l8.jpg" alt="">
-						      <div class="content-details fadeIn-bottom">
-							        <div class="bottom d-flex align-items-center justify-content-center">
-										<a href="#"><span class="lnr lnr-heart"></span></a>
-										<a href="#"><span class="lnr lnr-layers"></span></a>
-										<a href="#"><span class="lnr lnr-cart"></span></a>
-										<a href="#" data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
-									</div>
-						      </div>
-						  </div>
-						  <div class="price">
-						  		<h5>Long Sleeve shirt</h5>
-						  		<h3>$150.00</h3>
-						   </div>						  
-						</div>																			
+                        </div>
+                        @endfor																						
 					</div>
 				</div>	
 			</section>
@@ -404,120 +286,34 @@
 				<div class="container">
 					<div class="related-content">
 						<div class="title text-center">
-							<h1 class="mb-10">Related Searched Products</h1>
+							<h1 class="mb-10">Top Rated</h1>
 							<p>Who are in extremely love with eco friendly system.</p>
 						</div>
 					</div>					
 					<div class="row">
+                    @for ($i = 0; $i < 12; $i++)
 						<div class="col-lg-3 col-md-4 col-sm-6 mb-20">
 							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r1.jpg" alt=""></a>
+                                <a href="#"><img style="height:120px" class="img-fluid d-block mx-auto" src="https://image.tmdb.org/t/p/original/{{$listtoprated[$i]->poster_path}}" alt=""></a>
 								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
-									<div class="price"><span class="lnr lnr-tag"></span> $189.00</div>
+									<a href="#" class="title">{{$listtoprated[$i]->original_title}}</a>
+                                    <div class="price"><span class="lnr lnr-tag"></span>
+                                    @if ($listtoprated[$i]->vote_average >= 1 && $listtoprated[$i]->vote_average <= 3)
+    Rp 3.500
+@elseif ($listtoprated[$i]->vote_average >= 3 && $listtoprated[$i]->vote_average <= 6)
+    Rp 8.250
+@elseif ($listtoprated[$i]->vote_average >= 6 && $listtoprated[$i]->vote_average <= 8)
+    Rp 16.350
+    @elseif ($listtoprated[$i]->vote_average >= 8 && $listtoprated[$i]->vote_average <= 10)
+    Rp 21.250
+@endif
+                                </div>
 								</div>
 							</div>							
-						</div>		
-						<div class="col-lg-3 col-md-4 col-sm-6 mb-20">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r2.jpg" alt=""></a>
-								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
-									<div class="price"><span class="lnr lnr-tag"></span> $189.00</div>
-								</div>
-							</div>							
-						</div>		
-						<div class="col-lg-3 col-md-4 col-sm-6 mb-20">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r3.jpg" alt=""></a>
-								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
-									<div class="price"><span class="lnr lnr-tag"></span> $189.00</div>
-								</div>
-							</div>							
-						</div>		
-						<div class="col-lg-3 col-md-4 col-sm-6 mb-20">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r4.jpg" alt=""></a>
-								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
-									<div class="price"><span class="lnr lnr-tag"></span> $189.00</div>
-								</div>
-							</div>							
-						</div>	
-						<div class="col-lg-3 col-md-4 col-sm-6 mb-20">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r5.jpg" alt=""></a>
-								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
-									<div class="price"><span class="lnr lnr-tag"></span> $189.00</div>
-								</div>
-							</div>							
-						</div>		
-						<div class="col-lg-3 col-md-4 col-sm-6 mb-20">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r6.jpg" alt=""></a>
-								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
-									<div class="price"><span class="lnr lnr-tag"></span> $189.00</div>
-								</div>
-							</div>							
-						</div>		
-						<div class="col-lg-3 col-md-4 col-sm-6 mb-20">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r7.jpg" alt=""></a>
-								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
-									<div class="price"><span class="lnr lnr-tag"></span> $189.00</div>
-								</div>
-							</div>							
-						</div>		
-						<div class="col-lg-3 col-md-4 col-sm-6 mb-20">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r8.jpg" alt=""></a>
-								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
-									<div class="price"><span class="lnr lnr-tag"></span> $189.00</div>
-								</div>
-							</div>							
-						</div>	
-						<div class="col-lg-3 col-md-4 col-sm-6">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r9.jpg" alt=""></a>
-								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
-									<div class="price"><span class="lnr lnr-tag"></span> $189.00</div>
-								</div>
-							</div>							
-						</div>		
-						<div class="col-lg-3 col-md-4 col-sm-6">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r10.jpg" alt=""></a>
-								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
-									<div class="price"><span class="lnr lnr-tag"></span> $189.00</div>
-								</div>
-							</div>							
-						</div>		
-						<div class="col-lg-3 col-md-4 col-sm-6">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r11.jpg" alt=""></a>
-								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
-									<div class="price"><span class="lnr lnr-tag"></span> $189.00</div>
-								</div>
-							</div>							
-						</div>		
-						<div class="col-lg-3 col-md-4 col-sm-6">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r12.jpg" alt=""></a>
-								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
-									<div class="price"><span class="lnr lnr-tag"></span> $189.00</div>
-								</div>
-							</div>							
-						</div>																		
-					</div>
+                        </div>
+                        @endfor																			
+                    </div>
+                </div>
 			</section>
 			<!-- End related-product Area -->
 	

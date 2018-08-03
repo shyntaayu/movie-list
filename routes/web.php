@@ -11,8 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',['as'=> 'getIndex','uses'=>'MovieController@getIndex']);
 
 Route::get('/movie/topRated',['as'=> 'getAllTopRated','uses'=>'MovieController@getAllTopRated']);
