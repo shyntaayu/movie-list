@@ -44,6 +44,27 @@ class MovieController extends Controller
 		return view('welcome', $data);
     }
 
+    public function detailMovie($movieid) {
+        $urldetail="https://api.themoviedb.org/3/movie/".$movieid."?api_key=fe969c9839d99ddbd49bce311034c232&language=en-US";
+        $urlrecom = "https://api.themoviedb.org/3/movie/".$movieid."/recommendations?api_key=fe969c9839d99ddbd49bce311034c232&language=en-US&page=1";
+        $urlreview = "https://api.themoviedb.org/3/movie/".$movieid."/reviews?api_key=fe969c9839d99ddbd49bce311034c232&language=en-US&page=1";
+        $urlcredit = "https://api.themoviedb.org/3/movie/".$movieid."/credits?api_key=fe969c9839d99ddbd49bce311034c232";
+
+        $detailmovie = access_api($urldetail,'GET',[]);
+        $recom = access_api($urlrecom,'GET',[]);
+        $review = access_api($urlreview,'GET',[]);
+        $credit = access_api($urlcredit,'GET',[]);
+        $data['detail'] = $detailmovie;
+        $data['recom'] = $recom->results;
+        $data['review'] = $review->results;
+        $data['credit'] = $credit->cast;
+        // var_dump($data['review']);
+        return view('detail', $data);
+            // \Session::flash('message', "file not found");
+            // \Session::flash('alert-class', 'alert-danger');
+            // return \Redirect::back();
+    }
+
     
 
     public function getAllTopRated(){

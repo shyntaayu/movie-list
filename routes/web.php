@@ -12,5 +12,5 @@
 */
 
 Route::get('/',['as'=> 'getIndex','uses'=>'MovieController@getIndex']);
-
 Route::get('/movie/topRated',['as'=> 'getAllTopRated','uses'=>'MovieController@getAllTopRated']);
+Route::get('/detail/{movieid}',['as'=> 'detailMovie','uses'=>'MovieController@detailMovie']);
