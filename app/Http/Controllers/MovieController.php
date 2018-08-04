@@ -45,27 +45,44 @@ class MovieController extends Controller
     }
 
     public function detailMovie($movieid) {
+        $a = explode('-', $movieid); // Restricts it to only 2 values, for names like Billy Bob Jones
+
+        $movieid = $a[0];
         $urldetail="https://api.themoviedb.org/3/movie/".$movieid."?api_key=fe969c9839d99ddbd49bce311034c232&language=en-US";
         $urlrecom = "https://api.themoviedb.org/3/movie/".$movieid."/recommendations?api_key=fe969c9839d99ddbd49bce311034c232&language=en-US&page=1";
         $urlreview = "https://api.themoviedb.org/3/movie/".$movieid."/reviews?api_key=fe969c9839d99ddbd49bce311034c232&language=en-US&page=1";
         $urlcredit = "https://api.themoviedb.org/3/movie/".$movieid."/credits?api_key=fe969c9839d99ddbd49bce311034c232";
+        $urlsimilar = "https://api.themoviedb.org/3/movie/".$movieid."/similar?api_key=fe969c9839d99ddbd49bce311034c232&language=en-US&page=1";
+        $urltitle = "https://api.themoviedb.org/3/movie/".$movieid."/alternative_titles?api_key=fe969c9839d99ddbd49bce311034c232";
 
         $detailmovie = access_api($urldetail,'GET',[]);
         $recom = access_api($urlrecom,'GET',[]);
         $review = access_api($urlreview,'GET',[]);
         $credit = access_api($urlcredit,'GET',[]);
+        $similar = access_api($urlsimilar,'GET',[]);
+        $alttitle = access_api($urltitle,'GET',[]);
+        $time = $detailmovie->runtime;
+        $format = '%02d:%02d';
+        if ($time < 1) {
+            return;
+        }
+        $hours = floor($time / 60);
+        $minutes = ($time % 60);
+        $duration =  sprintf($format, $hours, $minutes);
+
         $data['detail'] = $detailmovie;
         $data['recom'] = $recom->results;
         $data['review'] = $review->results;
         $data['credit'] = $credit->cast;
-        // var_dump($data['review']);
+        $data['duration'] = $duration;
+        $data['similar'] = $similar->results;
+        $data['title'] = $alttitle->titles;
+        // var_dump($alttitle);
         return view('detail', $data);
             // \Session::flash('message', "file not found");
             // \Session::flash('alert-class', 'alert-danger');
             // return \Redirect::back();
     }
-
-    
 
     public function getAllTopRated(){
         $urlpopular = "https://api.themoviedb.org/3/movie/popular?page=1&language=en-US&api_key=fe969c9839d99ddbd49bce311034c232";

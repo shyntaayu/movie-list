@@ -1,7 +1,7 @@
-@extends('layout.header')
+@extends('layout.header-detail')
 @section('content')
             <!-- Start Banner Area -->
-            <section class="banner-area organic-breadcrumb">
+            <section class="banner-area organic-breadcrumb" style="margin-top: 50px;">
                 <div class="container">
                     <div class="breadcrumb-banner d-flex flex-wrap align-items-center">
                         <div class="col-first" style="width: 100%;">
@@ -42,8 +42,11 @@
     Rp 21.250
 @endif
                                     </span></div>
-                                    <div class="category">Category: <span>Household</span></div>
-                                    <div class="available">Availibility: <span>In Stock</span></div>
+                                    <div class="category">Category: 
+                                    @foreach($detail->genres as $category)
+                                    <span>{{$category->name}}</span>
+                                    @endforeach</div>
+                                    <div class="available">Duration : <span>{{$duration}} hour</div>
                                 </div>
                                 <div class="middle">
                                     <p class="content">{{$detail->overview}}</p>
@@ -77,10 +80,10 @@
                             <a class="nav-link" id="description-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-expanded="true">Description</a>
                         </li>
                         <li>
-                            <a class="nav-link" id="specification-tab" data-toggle="tab" href="#specification" role="tab" aria-controls="specification">Credit</a>
+                            <a class="nav-link" id="specification-tab" data-toggle="tab" href="#specification" role="tab" aria-controls="specification">Casts</a>
                         </li>
                         <li>
-                            <a class="nav-link" id="comments-tab" data-toggle="tab" href="#comments" role="tab" aria-controls="comments">Comments</a>
+                            <a class="nav-link" id="comments-tab" data-toggle="tab" href="#comments" role="tab" aria-controls="comments">Alternative Title</a>
                         </li>
                         <li>
                             <a class="nav-link active" id="reviews-tab" data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews">Reviews</a>
@@ -118,61 +121,24 @@
                     <div class="tab-pane fade" id="comments" role="tabpanel" aria-labelledby="comments">
                         <div class="review-wrapper">
                             <div class="row">
-                                <div class="col-xl-6">
-                                    <div class="total-comment">
-                                        <div class="single-comment">
-                                            <div class="user-details d-flex align-items-center flex-wrap">
-                                                <img src="img/organic-food/u1.png" class="img-fluid order-1 order-sm-1" alt="">
-                                                <div class="user-name order-3 order-sm-2">
-                                                    <h5>Blake Ruiz</h5>
-                                                    <span>12th Feb, 2017 at 05:56 pm</span>
-                                                </div>
-                                                <a href="#" class="view-btn color-2 reply order-2 order-sm-3"><i class="fa fa-reply" aria-hidden="true"></i><span>Reply</span></a>
-                                            </div>
-
-                                            <p class="user-comment">
-                                                Acres of Diamonds… you’ve read the famous story, or at least had it related to you. A farmer hears tales of diamonds and begins dreaming of vast riches. He sells his farm and hikes off over the horizon, never to be heard from again.
-                                            </p>
+                                <div class="col-xl-12">
+                                   <div class="button-group-area mt-40">
+                                       @foreach($title as $title)
+                                       @if($loop->iteration%2==0)
+                                       <div class="row">
+                                        <a href="#" style="display: inline-table;" class="genric-btn primary circle arrow">{{$title->iso_3166_1}}<span class="lnr lnr-arrow-right"></span></a>
+                                        <blockquote class="generic-blockquote col-md-9">{{$title->title}}
+								</blockquote>
+</div>
+@else
+                                        <div class="row">
+                                        <a href="#" style="display: inline-table;" class="genric-btn info circle arrow">{{$title->iso_3166_1}}<span class="lnr lnr-arrow-right"></span></a>
+                                        <blockquote class="generic-blockquote col-md-9">{{$title->title}}
+								</blockquote>
                                         </div>
-                                        <div class="single-comment reply-comment">
-                                            <div class="user-details d-flex align-items-center flex-wrap">
-                                                <img src="img/organic-food/u2.png" class="img-fluid order-1 order-sm-1" alt="">
-                                                <div class="user-name order-3 order-sm-2">
-                                                    <h5>Logan May</h5>
-                                                    <span>12th Feb, 2017 at 05:56 pm</span>
-                                                </div>
-                                                <a href="#" class="view-btn color-2 reply order-2 order-sm-3"><i class="fa fa-reply" aria-hidden="true"></i><span>Reply</span></a>
-                                            </div>
-                                            <p class="user-comment">
-                                                Acres of Diamonds… you’ve read the famous story, or at least had it related to you. A farmer hears tales of diamonds and begins dreaming of vast riches. He sells his farm and hikes off over the horizon, never to be heard from again.
-                                            </p>
-                                        </div>
-                                        <div class="single-comment">
-                                            <div class="user-details d-flex align-items-center flex-wrap">
-                                                <img src="img/organic-food/u3.png" class="img-fluid order-1 order-sm-1" alt="">
-                                                <div class="user-name order-3 order-sm-2">
-                                                    <h5>Aaron Anderson</h5>
-                                                    <span>12th Feb, 2017 at 05:56 pm</span>
-                                                </div>
-                                                <a href="#" class="view-btn color-2 reply order-2 order-sm-3"><i class="fa fa-reply" aria-hidden="true"></i><span>Reply</span></a>
-                                            </div>
-                                            <p class="user-comment">
-                                                Acres of Diamonds… you’ve read the famous story, or at least had it related to you. A farmer hears tales of diamonds and begins dreaming of vast riches. He sells his farm and hikes off over the horizon, never to be heard from again.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-6">
-                                    <div class="add-review">
-                                        <h3>Post a comment</h3>
-                                        <form action="#" class="main-form">
-                                            <input type="text" placeholder="Your Full name" onfocus="this.placeholder=''" onblur="this.placeholder = 'Your Full name'" required class="common-input">
-                                            <input type="email" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" placeholder="Email Address" onfocus="this.placeholder=''" onblur="this.placeholder = 'Email Address'" required class="common-input">
-                                            <input type="text" placeholder="Phone Number" onfocus="this.placeholder=''" onblur="this.placeholder = 'Phone Number'" required class="common-input">
-                                            <textarea placeholder="Messege" onfocus="this.placeholder=''" onblur="this.placeholder = 'Messege'" required class="common-textarea"></textarea>
-                                            <button class="view-btn color-2"><span>Submit Now</span></button>
-                                        </form>
-                                    </div>
+                                        @endif
+@endforeach
+                                    </div> 
                                 </div>
                             </div>
                         </div>
@@ -183,9 +149,9 @@
                                 <div class="col-lg-6">
                                     <div class="review-stat d-flex align-items-center flex-wrap">
                                         <div class="review-overall">
-                                            <h3>Overall</h3>
-                                            <div class="main-review">4.0</div>
-                                            <span>(03 Reviews)</span>
+                                            <h3>Rating</h3>
+                                            <div class="main-review">{{$detail->vote_average}}</div>
+                                            <span>({{$detail->vote_count}} Vote count)</span>
                                         </div>
                                         <div class="review-count">
                                             <h4>Based on 3 Reviews</h4>
@@ -250,7 +216,6 @@
                                     @foreach ($review as $review)
                                         <div class="single-comment">
                                             <div class="user-details d-flex align-items-center">
-                                                <img src="img/organic-food/u1.png" class="img-fluid" alt="">
                                                 <div class="user-name">
                                                     <h5>{{$review->author}}</h5>
                                                     <div class="total-star five-star d-flex align-items-center">
@@ -299,6 +264,42 @@
                 </div>
             </div>
             <!-- End Product Details -->
+
+            <!-- Start related-product Area --> 
+			<section class="related-product-area section-gap" id="latest">
+				<div class="container">
+					<div class="related-content">
+						<div class="title text-center">
+							<h1 class="mb-10">More Similar Movie</h1>
+							<p>Here's the similar film with <b>{{$detail->original_title}}</b></p>
+						</div>
+					</div>					
+					<div class="row">
+                    @for ($i = 0; $i < 12; $i++)
+						<div class="col-lg-3 col-md-4 col-sm-6 mb-20">
+							<div class="single-related-product d-flex">
+                                <a href="#"><img style="height:120px" class="img-fluid d-block mx-auto" src="https://image.tmdb.org/t/p/original/{{$similar[$i]->poster_path}}" alt=""></a>
+								<div class="desc">
+									<a href="#" class="title">{{$similar[$i]->original_title}}</a>
+                                    <div class="price"><span class="lnr lnr-tag"></span>
+                                    @if ($similar[$i]->vote_average >= 1 && $similar[$i]->vote_average <= 3)
+    Rp 3.500
+@elseif ($similar[$i]->vote_average >= 3 && $similar[$i]->vote_average <= 6)
+    Rp 8.250
+@elseif ($similar[$i]->vote_average >= 6 && $similar[$i]->vote_average <= 8)
+    Rp 16.350
+    @elseif ($similar[$i]->vote_average >= 8 && $similar[$i]->vote_average <= 10)
+    Rp 21.250
+@endif
+                                </div>
+								</div>
+							</div>							
+                        </div>
+                        @endfor																			
+                    </div>
+                </div>
+			</section>
+			<!-- End related-product Area -->
                     
             <!-- Start Most Search Product Area -->
             <section class="pt-100 pb-100">
@@ -361,7 +362,7 @@
                                             <h3 class="head">Mill Oil 1000W Heater, White</h3>
                                             <div class="price d-flex align-items-center"><span class="lnr lnr-tag"></span> <span class="ml-10">$149.99</span></div>
                                             <div class="category">Category: <span>Household</span></div>
-                                            <div class="available">Availibility: <span>In Stock</span></div>
+                                            <div class="available">Duration : <span>{{$duration}}</span></div>
                                         </div>
                                         <div class="middle">
                                             <p class="content">Mill Oil is an innovative oil filled radiator with the most modern technology. If you are looking for something that can make your interior look awesome, and at the same time give you the pleasant warm feeling during the winter.</p>

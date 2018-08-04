@@ -74,7 +74,7 @@
 										<a href="#"><span class="lnr lnr-heart"></span></a>
 										<a href="#"><span class="lnr lnr-layers"></span></a>
 										<a href="#"><span class="lnr lnr-cart"></span></a>
-										<a href="{{ url('/detail/'.$listupcoming[$i]->id) }}"><span class="lnr lnr-frame-expand"></span></a>
+										<a href="{{ url('/detail/'.$listupcoming[$i]->id.'-'.str_replace(' ', '-',$listupcoming[$i]->original_title)) }}"><span class="lnr lnr-frame-expand"></span></a>
 									</div>
 						      </div>
 						  </div>
