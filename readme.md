@@ -7,6 +7,39 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
+## About MovieKu website
+Look in here
+<a href="https://angkringan-list.000webhostapp.com/">https://angkringan-list.000webhostapp.com/</a>
+
+This website contain :
+- Will use the tMDB API, for documentation can be read at:
+<a href="https://developers.themoviedb.org/3/getting-started/introduction">https://developers.themoviedb.org/3/getting-started/introduction</a>
+- Hint: To use the tMDB API you are required to have the Key API, you can get this Key API by registering according to the instructions in the link above.
+- Pricing for purchasing movie access depends on the rating of the film by referring to the following table:
+
+Rating 1-3
+Price Rp. 3,500
+Rating 3-6
+Price Rp. 8,250
+Rating 6-8
+Price Rp. 16,350
+Rating 8-10
+Price Rp. 21,250
+
+## In the application there will be 2 pages Single Page Application:
+- The main page that shows films that are airing in around the world
+- This main page can be accessed on the path / in your application.
+- Apply scroll system to load the next list of films.
+- When the movie is clicked, the user will be moved to the movie detail page.
+- In the movie list, there must be at least information about: Poster, title, price of the film
+
+## The movie detail page that will contain details of the movie that the user is highlighting, this page will contain:
+- Title, poster, rating, casts, duration of the film, price of the film, indicator of whether the user has the film, etc.
+- Similar film
+- Movie recommendations.
+ Any information related to film, according to your creativity.
+- This page can be accessed with the path / <movie_id> - <slug> on your application. (You can get slug from the movie title by replacing all whitespace characters into dash (-) characters)
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
