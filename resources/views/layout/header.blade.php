@@ -4,7 +4,7 @@
 		<!-- Mobile Specific Meta -->
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<!-- Favicon-->
-		<link rel="shortcut icon" href="img/fav.png">
+		<link rel="shortcut icon" href="{{ asset('assets/img/fav.png')}}">
 		<!-- Author Meta -->
 		<meta name="author" content="CodePixar">
 		<!-- Meta Description -->
@@ -14,7 +14,7 @@
 		<!-- meta character set -->
 		<meta charset="UTF-8">
 		<!-- Site Title -->
-		<title>Shop</title>
+		<title>MovieKu</title>
 
 		<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet"> 
 			<!--
@@ -35,7 +35,7 @@
 				<nav class="navbar navbar-expand-lg  navbar-light">
 					<div class="container">
 						  <a class="navbar-brand" href="#">
-						  	<img src="img/logo.png" alt="">
+						  	<img src="{{ asset('assets/img/logo.png')}}" alt="">
 						  </a>
 						  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 						    <span class="navbar-toggler-icon"></span>
@@ -46,24 +46,7 @@
 								<li><a href="#catagory">Now Playing</a></li>
 								<li><a href="#men">UpComing</a></li>
 								<li><a href="#women">Popular</a></li>
-								<li><a href="#latest">Top Rated</a></li>
-									<!-- Dropdown -->
-								    <li class="dropdown">
-								      <a class="dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-								        Pages
-								      </a>
-								      <div class="dropdown-menu">
-								        <a class="dropdown-item" href="category.html">Category</a>
-								        <a class="dropdown-item" href="single.html">Single</a>
-								        <a class="dropdown-item" href="cart.html">Cart</a>
-								        <a class="dropdown-item" href="checkout.html">Checkout</a>
-								        <a class="dropdown-item" href="confermation.html">Confermation</a>
-								        <a class="dropdown-item" href="login.html">Login</a>
-								        <a class="dropdown-item" href="tracking.html">Tracking</a>
-								        <a class="dropdown-item" href="generic.html">Generic</a>
-								        <a class="dropdown-item" href="elements.html">Elements</a>
-								      </div>
-								    </li>									
+								<li><a href="#latest">Top Rated</a></li>							
 						    </ul>
 						  </div>						
 					</div>

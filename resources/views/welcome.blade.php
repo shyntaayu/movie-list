@@ -8,12 +8,11 @@
 							<img class="img-fluid" src="https://image.tmdb.org/t/p/original/{{$popular->poster_path}}" alt="">
 						</div>
 						<div class="banner-content col-lg-6 col-md-12">
-							<h1 class="title-top"><span>Flat</span> 75%Off</h1>
+							<h1 class="title-top"><span>Rate</span> {{$popular->vote_average}}</h1>
 							<h1 class="text-uppercase">
-								It’s Happening <br>
-								this Season!
+								{{$popular->original_title}}
 							</h1>
-							<button class="primary-btn text-uppercase"><a href="#">Purchase Now</a></button>
+							<button class="primary-btn text-uppercase"><a href="#">Most popular this time</a></button>
 						</div>							
 					</div>
 				</div>
@@ -27,7 +26,7 @@
 						<div class="menu-content pb-40">
 							<div class="title text-center">
 								<h1 class="mb-10">Now Playing</h1>
-								<p>Who are in extremely love with eco friendly system.</p>
+								<p>Here's the now playing movie</p>
 							</div>
 						</div>
 					</div>					
@@ -39,13 +38,32 @@
 						      <div class="content-overlay"></div>
 						  		 <img class="content-image img-fluid d-block mx-auto" src="https://image.tmdb.org/t/p/original/{{$listnowplaying[$i]->poster_path}}" alt="">
 						      <div class="content-details fadeIn-bottom">
-						        <h3 class="content-title">{{$listnowplaying[$i]->original_title}}</h3>
+								<h3 class="content-title">{{$listnowplaying[$i]->original_title}}</h3>
+								<h4 class="text-white">
+                                  @if ($listnowplaying[$i]->vote_average >= 1 && $listnowplaying[$i]->vote_average <= 3)
+    Rp 3.500
+@elseif ($listnowplaying[$i]->vote_average >= 3 && $listnowplaying[$i]->vote_average <= 6)
+    Rp 8.250
+@elseif ($listnowplaying[$i]->vote_average >= 6 && $listnowplaying[$i]->vote_average <= 8)
+    Rp 16.350
+    @elseif ($listnowplaying[$i]->vote_average >= 8 && $listnowplaying[$i]->vote_average <= 10)
+    Rp 21.250
+@endif
+								  </h4>
+								  <br>
+								  <a href="{{ url('/detail/'.$listnowplaying[$i]->id.'-'.str_replace(' ', '-',$listnowplaying[$i]->original_title)) }}" class="genric-btn default-border radius">Detail</a>
 						      </div>
 						    </a>
 						  </div>
                         </div>
                         @endfor				
 					</div>
+					<br><br>
+					<div class="row">
+						<div class="col-md-4"></div>
+					<a href="{{ url('/loadmore/nowplaying') }}" class="col-md-4 genric-btn primary-border circle">Load More <span class="lnr lnr-sync"></span></a>
+					<div class="col-md-4"></div>
+</div>
 				</div>	
 			</section>
 			<!-- End category Area -->
@@ -58,7 +76,7 @@
 						<div class="menu-content pb-40">
 							<div class="title text-center">
 								<h1 class="text-white mb-10">New Upcoming Movies</h1>
-								<p class="text-white">Who are in extremely love with eco friendly system.</p>
+								<p class="text-white">Here's the new upcoming movie</p>
 							</div>
 						</div>
 					</div>
@@ -71,10 +89,7 @@
 						  		 <img class="content-image img-fluid d-block mx-auto" src="https://image.tmdb.org/t/p/original/{{$listupcoming[$i]->poster_path}}" alt="">
 						      <div class="content-details fadeIn-bottom">
 							        <div class="bottom d-flex align-items-center justify-content-center">
-										<a href="#"><span class="lnr lnr-heart"></span></a>
-										<a href="#"><span class="lnr lnr-layers"></span></a>
-										<a href="#"><span class="lnr lnr-cart"></span></a>
-										<a href="{{ url('/detail/'.$listupcoming[$i]->id.'-'.str_replace(' ', '-',$listupcoming[$i]->original_title)) }}"><span class="lnr lnr-frame-expand"></span></a>
+										<a href="{{ url('/detail/'.$listupcoming[$i]->id.'-'.str_replace(' ', '-',$listupcoming[$i]->original_title)) }}">Detail</a>
 									</div>
 						      </div>
 						  </div>
@@ -90,11 +105,17 @@
     @elseif ($listupcoming[$i]->vote_average >= 8 && $listupcoming[$i]->vote_average <= 10)
     Rp 21.250
 @endif
-                                  </h3>
+								  </h3>
 						   </div>
                         </div>	
                         @endfor																		
 					</div>
+					<br><br>
+					<div class="row">
+						<div class="col-md-4"></div>
+					<a href="{{ url('/loadmore/upcoming') }}" class="col-md-4 genric-btn primary-border circle">Load More <span class="lnr lnr-sync"></span></a>
+					<div class="col-md-4"></div>
+</div>
 				</div>	
 			</section>
 			<!-- End men-product Area -->
@@ -116,10 +137,7 @@
 						  		 <img class="content-image img-fluid d-block mx-auto" width="10%" src="https://image.tmdb.org/t/p/original/{{$listpopular[$i]->poster_path}}" alt="">
 						      <div class="content-details fadeIn-bottom">
 							        <div class="bottom d-flex align-items-center justify-content-center">
-										<a href="#"><span class="lnr lnr-heart"></span></a>
-										<a href="#"><span class="lnr lnr-layers"></span></a>
-										<a href="#"><span class="lnr lnr-cart"></span></a>
-										<a href="#" data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
+									<a href="{{ url('/detail/'.$listpopular[$i]->id.'-'.str_replace(' ', '-',$listpopular[$i]->original_title)) }}">Detail</a>
 									</div>
 						      </div>
 						  </div>
@@ -140,6 +158,12 @@
                         </div>
                         @endfor																						
 					</div>
+					<br><br>
+					<div class="row">
+						<div class="col-md-4"></div>
+					<a href="{{ url('/loadmore/popular') }}" class="col-md-4 genric-btn primary-border circle">Load More <span class="lnr lnr-sync"></span></a>
+					<div class="col-md-4"></div>
+</div>
 				</div>	
 			</section>
 			<!-- End women-product Area -->
@@ -189,7 +213,7 @@
 									<div class="countdown-label text" id="second-countdown">Seconds</div>
 								</div>
 								<a href="#" class="view-btn primary-btn2"><span>Shop Now</span></a>
-								<img src="img/cd.png" class="img-fluid cd-img" alt="">
+								<img src="{{ asset('assets/img/cd.png')}}" class="img-fluid cd-img" alt="">
 							</div>
 						</div>
 					</div>
@@ -203,16 +227,16 @@
 					<div class="related-content">
 						<div class="title text-center">
 							<h1 class="mb-10">Top Rated</h1>
-							<p>Who are in extremely love with eco friendly system.</p>
+							<p>Here's the top rated movie</p>
 						</div>
 					</div>					
 					<div class="row">
                     @for ($i = 0; $i < 12; $i++)
 						<div class="col-lg-3 col-md-4 col-sm-6 mb-20">
 							<div class="single-related-product d-flex">
-                                <a href="#"><img style="height:120px" class="img-fluid d-block mx-auto" src="https://image.tmdb.org/t/p/original/{{$listtoprated[$i]->poster_path}}" alt=""></a>
+                                <a href="{{ url('/detail/'.$listtoprated[$i]->id.'-'.str_replace(' ', '-',$listtoprated[$i]->original_title)) }}"><img style="height:120px" class="img-fluid d-block mx-auto" src="https://image.tmdb.org/t/p/original/{{$listtoprated[$i]->poster_path}}" alt=""></a>
 								<div class="desc">
-									<a href="#" class="title">{{$listtoprated[$i]->original_title}}</a>
+									<a href="{{ url('/detail/'.$listtoprated[$i]->id.'-'.str_replace(' ', '-',$listtoprated[$i]->original_title)) }}" class="title">{{$listtoprated[$i]->original_title}}</a>
                                     <div class="price"><span class="lnr lnr-tag"></span>
                                     @if ($listtoprated[$i]->vote_average >= 1 && $listtoprated[$i]->vote_average <= 3)
     Rp 3.500
@@ -228,33 +252,15 @@
 							</div>							
                         </div>
                         @endfor																			
-                    </div>
+					</div>
+					<br><br>
+					<div class="row">
+						<div class="col-md-4"></div>
+					<a href="{{ url('/loadmore/toprated') }}" class="col-md-4 genric-btn primary-border circle">Load More <span class="lnr lnr-sync"></span></a>
+					<div class="col-md-4"></div>
+</div>
                 </div>
 			</section>
 			<!-- End related-product Area -->
-	
-			<!-- Start brand Area -->
-			<section class="brand-area pb-100">
-				<div class="container">
-					<div class="row logo-wrap">
-							<a class="col single-img" href="#">
-								<img class="d-block mx-auto" src="img/br1.png" alt="">
-							</a>
-							<a class="col single-img" href="#">
-								<img class="d-block mx-auto" src="img/br2.png" alt="">
-							</a>
-							<a class="col single-img" href="#">
-								<img class="d-block mx-auto" src="img/br3.png" alt="">
-							</a>
-							<a class="col single-img" href="#">
-								<img class="d-block mx-auto" src="img/br4.png" alt="">
-							</a>
-							<a class="col single-img" href="#">
-								<img class="d-block mx-auto" src="img/br5.png" alt="">
-							</a>
-					</div>	
-				</div>	
-			</section>
-			<!-- End brand Area -->
 
 			@stop

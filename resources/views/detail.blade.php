@@ -271,10 +271,11 @@
 					<div class="related-content">
 						<div class="title text-center">
 							<h1 class="mb-10">More Similar Movie</h1>
-							<p>Here's the similar film with <b>{{$detail->original_title}}</b></p>
+							<p>Here's the similar movie by <b>{{$detail->original_title}}</b></p>
 						</div>
 					</div>					
 					<div class="row">
+                        @if(count($similar)>12)
                     @for ($i = 0; $i < 12; $i++)
 						<div class="col-lg-3 col-md-4 col-sm-6 mb-20">
 							<div class="single-related-product d-flex">
@@ -295,7 +296,30 @@
 								</div>
 							</div>							
                         </div>
-                        @endfor																			
+                        @endfor
+                        @else
+                        @foreach ($similar as $similar)
+						<div class="col-lg-3 col-md-4 col-sm-6 mb-20">
+							<div class="single-related-product d-flex">
+                                <a href="#"><img style="height:120px" class="img-fluid d-block mx-auto" src="https://image.tmdb.org/t/p/original/{{$similar[$i]->poster_path}}" alt=""></a>
+								<div class="desc">
+									<a href="#" class="title">{{$similar->original_title}}</a>
+                                    <div class="price"><span class="lnr lnr-tag"></span>
+                                    @if ($similar->vote_average >= 1 && $similar->vote_average <= 3)
+    Rp 3.500
+@elseif ($similar->vote_average >= 3 && $similar->vote_average <= 6)
+    Rp 8.250
+@elseif ($similar->vote_average >= 6 && $similar->vote_average <= 8)
+    Rp 16.350
+    @elseif ($similar->vote_average >= 8 && $similar->vote_average <= 10)
+    Rp 21.250
+@endif
+                                </div>
+								</div>
+							</div>							
+                        </div>
+                        @endforeach
+                        @endif																			
                     </div>
                 </div>
 			</section>
@@ -306,8 +330,10 @@
                 <div class="container">
                     <div class="organic-section-title text-center">
                         <h3>Most Recommendations Movie</h3>
+                        <p>Here's the recommendations movie by <b>{{$detail->original_title}}</b></p>
                     </div>
                     <div class="row mt-30">
+                        @if(count($recom)>12)
                     @for ($i = 0; $i < 12; $i++)
                         <div class="col-lg-3 col-md-4 col-sm-6">
                             <div class="single-search-product d-flex">
@@ -329,6 +355,31 @@
                             </div>
                         </div>
                         @endfor
+                        @else
+                    @forelse($recom as $recom)
+                        <div class="col-lg-3 col-md-4 col-sm-6">
+                            <div class="single-search-product d-flex">
+                                <a href="02-11-product-details.html"><img src="https://image.tmdb.org/t/p/original/{{$recom->poster_path}}" alt=""></a>
+                                <div class="desc">
+                                    <a href="02-11-product-details.html" class="title">{{$recom->original_title}}</a>
+                                    <div class="price"><span class="lnr lnr-tag"></span>
+                                    @if ($recom->vote_average >= 1 && $recom->vote_average <= 3)
+    Rp 3.500
+@elseif ($recom->vote_average >= 3 && $recom->vote_average <= 6)
+    Rp 8.250
+@elseif ($recom->vote_average >= 6 && $recom->vote_average <= 8)
+    Rp 16.350
+    @elseif ($recom->vote_average >= 8 && $recom->vote_average <= 10)
+    Rp 21.250
+@endif
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        @empty 
+                        <p>No Recommendations</p>
+                        @endforelse
+                        @endif
                     </div>
                 </div>
             </section>
