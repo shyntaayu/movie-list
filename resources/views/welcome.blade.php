@@ -12,7 +12,7 @@
 							<h1 class="text-uppercase">
 								{{$popular->original_title}}
 							</h1>
-							<button class="primary-btn text-uppercase"><a href="#">Most popular this time</a></button>
+							<button class="primary-btn text-uppercase"><a href="{{ url('/loadmore/popular') }}">Most popular this time</a></button>
 						</div>							
 					</div>
 				</div>

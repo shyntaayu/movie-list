@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Storage;
 
 class MovieController extends Controller
 {
@@ -39,7 +40,17 @@ class MovieController extends Controller
             $data['listupcoming'] = [];
             $data['listlatest'] = [];
         }
-
+        $myfile = time().str_random();
+        $l = json_encode($data);
+        // if(localStorage){
+        //     var_dump(localStorage);
+        // }else{
+        //     var_dump("nothing");
+        // }
+// Storage::disk('local')->put($myfile, $l);
+        // $files = Storage::files('local');
+        // var_dump($files);
+        
         // var_dump($data['listupcoming']);
 		return view('welcome', $data);
     }
