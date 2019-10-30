@@ -5,7 +5,7 @@
 				<div class="container-fluid">
 					<div class="row fullscreen align-items-center justify-content-center">
 						<div class="col-lg-6 col-md-12 d-flex align-self-end img-right no-padding">
-							<img class="img-fluid" src="https://image.tmdb.org/t/p/original/{{$popular->poster_path}}" alt="">
+							<img style="height:auto; width:400px"lass="img-fluid img-responsive" src="https://image.tmdb.org/t/p/original/{{$popular->poster_path}}" alt="">
 						</div>
 						<div class="banner-content col-lg-6 col-md-12">
 							<h1 class="title-top"><span>Rate</span> {{$popular->vote_average}}</h1>
